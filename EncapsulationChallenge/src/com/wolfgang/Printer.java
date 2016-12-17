@@ -4,64 +4,41 @@ package com.wolfgang;
  * Created by johna on 12/16/2016.
  */
 public class Printer {
-    private double tonerLevel = 100d;
+    private int tonerLevel;
     private int pagesPrinted;
-    private boolean isDuplexPrinter;
+    private boolean isDuplex;
 
-    public Printer(double tonerLevel, int pagesPrinted, boolean isDuplexPrinter) {
-        if (tonerLevel >= 0d && tonerLevel < 100d) {
+    public Printer(int tonerLevel, boolean isDuplex) {
+        if (tonerLevel > -1 && tonerLevel <= 100) {
             this.tonerLevel = tonerLevel;
-        }
-        this.pagesPrinted = pagesPrinted;
-        this.isDuplexPrinter = isDuplexPrinter;
-    }
-
-    private void checkToner() {
-        if (tonerLevel >= 100d) {
-            System.out.println("The toner is already full");
         } else {
-            this.tonerLevel = 100d;
-            System.out.println("You have filled up the printer toner");
+            this.tonerLevel = -1;
         }
+
+        this.isDuplex = isDuplex;
+        this.pagesPrinted = 0;
     }
 
-    public void fillPrinterToner() {
-        this.checkToner();
-    }
-
-    private void printPage(int page) {
-        if (page > 0) {
-            for (int i = 1; i < page + 1; i++) {
-                this.pagesPrinted++;
+    public int addToner(int tonerAmount) {
+        if (tonerLevel > 0 && tonerAmount <= 100) {
+            if (this.tonerLevel + tonerAmount > 100) {
+                return -1;
             }
-            System.out.println("Pages printed: " + page);
-            System.out.println("Number of pages printed in total: " + this.pagesPrinted);
-
+            this.tonerLevel += tonerAmount;
+            return this.tonerLevel;
         } else {
-            System.out.println("You can't print negative pages");
-        }
-
-    }
-
-    private void useToner(int pages) {
-        double tonerUsed = pages * 0.5;
-
-        if (pages > 0) {
-            this.tonerLevel -= tonerUsed;
-            System.out.println("Toner used: " + tonerUsed);
-            System.out.println("New toner level: " + this.tonerLevel);
-        } else {
-            System.out.println("You can't use negative toner");
+            return -1;
         }
     }
 
-    public void printPages(int pages) {
-        printPage(pages);
-        useToner(pages);
-    }
-
-    public double getTonerLevel() {
-        return tonerLevel;
+    public int printPages(int pages) {
+        int pagesToPrint = pages;
+        if(this.isDuplex) {
+            pagesToPrint /= 2;
+            System.out.println("Printing in duplex mode");
+        }
+        this.pagesPrinted += pagesToPrint;
+        return pagesToPrint;
     }
 
     public int getPagesPrinted() {

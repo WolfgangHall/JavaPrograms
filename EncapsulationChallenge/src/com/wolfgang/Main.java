@@ -3,14 +3,15 @@ package com.wolfgang;
 public class Main {
 
     public static void main(String[] args) {
-	    Printer printer = new Printer(75.0, 0, true);
+        Printer printer = new Printer(50, true);
+        System.out.println("initial page count = " + printer.getPagesPrinted());
 
-	    printer.fillPrinterToner();
-	    printer.fillPrinterToner();
+        int pagesPrinted = printer.printPages(4);
+        System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = "
+        + printer.getPagesPrinted());
 
-	    printer.printPages(3);
-	    printer.printPages(2);
-
-        printer.printPages(-2);
+        pagesPrinted = printer.printPages(2);
+        System.out.println("Pages printed was " + pagesPrinted + " new total print count for printer = "
+                + printer.getPagesPrinted());
     }
 }
