@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public class GroceryList {
     private ArrayList<String> groceryList = new ArrayList<String>();
 
+    public ArrayList<String> getGroceryList() {
+        return groceryList;
+    }
+
     public void addGroceryItem(String item) {
         // set of methods associated with ArrayLists
         // add() allows us to add on to our list

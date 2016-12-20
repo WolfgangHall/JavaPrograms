@@ -1,5 +1,6 @@
 package com.wolfgang;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
@@ -40,6 +41,9 @@ public class Main {
                     searchForItem();
                     break;
                 case 6:
+                    processArrayList();
+                    break;
+                case 7:
                     quit = true;
                     break;
             }
@@ -87,5 +91,19 @@ public class Main {
         } else {
             System.out.println(searchItem + " is not in the shopping list");
         }
+    }
+
+    public static void processArrayList() {
+        ArrayList<String> newArray = new ArrayList<String>();
+        // gives you quick way to copy an array using get method
+        newArray.addAll(groceryList.getGroceryList());
+
+        // does the same thing as the above, but upon initialization
+        ArrayList<String> nextArray = new ArrayList<String>(groceryList.getGroceryList());
+
+
+        // allows you to process an ArrayList into an Array
+        String[] myArray = new String[groceryList.getGroceryList().size()];
+        myArray = groceryList.getGroceryList().toArray(myArray);
     }
 }
